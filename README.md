@@ -1,12 +1,12 @@
-![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/dariogriffo/zig-debian/total)
-![GitHub Downloads (all assets, latest release)](https://img.shields.io/github/downloads/dariogriffo/zig-debian/latest/total)
-![GitHub Release](https://img.shields.io/github/v/release/dariogriffo/zig-debian)
-![GitHub Release Date](https://img.shields.io/github/release-date/dariogriffo/zig-debian)
+![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/gaofengnan/zig-debian/total)
+![GitHub Downloads (all assets, latest release)](https://img.shields.io/github/downloads/gaofengnan/zig-debian/latest/total)
+![GitHub Release](https://img.shields.io/github/v/release/gaofengnan/zig-debian)
+![GitHub Release Date](https://img.shields.io/github/release-date/gaofengnan/zig-debian)
 
 <h1>
    <p align="center">
-     <a href="https://github.com/ziglang/zig/"><img src="https://github.com/dariogriffo/zig-debian/blob/main/zig-logo.png" alt="Zig Logo" width="128" style="margin-right: 20px"></a>
-     <a href="https://www.debian.org/"><img src="https://github.com/dariogriffo/zig-debian/blob/main/debian-logo.png" alt="Debian Logo" width="104" style="margin-left: 20px"></a>
+     <a href="https://github.com/ziglang/zig/"><img src="https://github.com/gaofengnan/zig-debian/blob/main/zig-logo.png" alt="Zig Logo" width="128" style="margin-right: 20px"></a>
+     <a href="https://www.debian.org/"><img src="https://github.com/gaofengnan/zig-debian/blob/main/debian-logo.png" alt="Debian Logo" width="104" style="margin-left: 20px"></a>
      <br>Zig for Debian
    </p>
 </h1>
@@ -46,8 +46,10 @@ stable.
 
 # Zig for Debian
 
+> Fork of [dariogriffo/zig-debian](https://github.com/dariogriffo/zig-debian) (MIT); the original packaging is by Dario Griffo. Served at [deb.gaofn.xyz](https://deb.gaofn.xyz) for Debian 12 (bookworm) and 13 (trixie).
+
 This repository contains build scripts to produce the _unofficial_ Debian packages
-(.deb) for [Zig](https://github.com/ziglang/zig) hosted at [deb.griffo.io](https://deb.griffo.io)
+(.deb) for [Zig](https://github.com/ziglang/zig) hosted at [deb.gaofn.xyz](https://deb.gaofn.xyz)
 
 Currently supported debian distros are:
 - Bookworm
@@ -60,19 +62,13 @@ install on Debian. If you're looking for the Zig source code, see
 
 ## Install/Update
 
-📖 **Step-by-step install guide:** [Debian](https://deb.griffo.io/install-latest-zig-in-debian.html) · [Ubuntu](https://deb.griffo.io/install-latest-zig-in-ubuntu.html)
-
 ### The Debian way
-
-> ⚠️ **apt access requires a yearly subscription**
-> ([deb.griffo.io](https://deb.griffo.io)). To use this tool for free, download
-> the .deb from the [Releases](https://github.com/dariogriffo/zig-debian/releases) page
-> and install it manually (see below).
 
 ```sh
 sudo install -d -m 0755 /etc/apt/keyrings
-curl -fsSL https://deb.griffo.io/EA0F721D231FDD3A0A17B9AC7808B4DD62C41256.asc | sudo gpg --dearmor --yes -o /etc/apt/keyrings/deb.griffo.io.gpg
-echo "deb [signed-by=/etc/apt/keyrings/deb.griffo.io.gpg] https://deb.griffo.io/apt $(lsb_release -sc 2>/dev/null) main" | sudo tee /etc/apt/sources.list.d/deb.griffo.io.list
+sudo curl -fsSL https://deb.gaofn.xyz/deb.gaofn.xyz.gpg -o /etc/apt/keyrings/deb.gaofn.xyz.gpg
+sudo curl -fsSL https://deb.gaofn.xyz/deb.gaofn.xyz.sources -o /etc/apt/sources.list.d/deb.gaofn.xyz.sources
+# Debian 12 (bookworm): fetch deb.gaofn.xyz-bookworm.sources instead
 sudo apt update
 sudo apt install zig           # current stable
 sudo apt install zig-oldstable # previous stable (optional, installs alongside zig-stable)
@@ -81,7 +77,7 @@ sudo apt install zig-oldstable # previous stable (optional, installs alongside z
 ### Manual Installation
 
 1. Download the .deb package for your Debian version available on
-   the [Releases](https://github.com/dariogriffo/zig-debian/releases) page.
+   the [Releases](https://github.com/gaofengnan/zig-debian/releases) page.
 2. Install the downloaded .deb package.
 
 ```sh
@@ -96,7 +92,7 @@ To update to a new version, just follow any of the installation methods above. T
 I want to have an easy-to-install Zig package for Debian, so I'm doing what
 I can to make it happen.
 If you want to test locally, you should be able to run
-[build_zig_debian.sh](https://github.com/dariogriffo/zig-debian/blob/main/build_zig_debian.sh)
+[build_zig_debian.sh](https://github.com/gaofengnan/zig-debian/blob/main/build_zig_debian.sh)
 on your own Debian system, only requirement is docker.
 
 ## Roadmap

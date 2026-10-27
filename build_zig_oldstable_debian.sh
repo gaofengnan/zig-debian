@@ -49,12 +49,12 @@ build_man_page() {
 }
 
 # One set of packages for every suite: upstream's binaries are static, so
-# only the old ~<suite> version suffix ever differed. The fixed ~griffo keeps
+# only the old ~<suite> version suffix ever differed. The fixed ~gaofn keeps
 # it below the distro's own build of the same version.
 build_packages() {
     local build_arch=$1
     local zig_arch=$2
-    local full_ver="$ZIG_VERSION-${BUILD_VERSION}~griffo_${build_arch}"
+    local full_ver="$ZIG_VERSION-${BUILD_VERSION}~gaofn_${build_arch}"
 
     echo "  Building zig-oldstable $full_ver"
 

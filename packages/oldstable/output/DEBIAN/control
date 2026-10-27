@@ -1,9 +1,9 @@
 Section: devel
 Priority: optional
-Maintainer: Dario Griffo <dariogriffo@gmail.com>
+Maintainer: Fengnan Gao <gao.fengnan@gmail.com>
 Homepage: https://ziglang.org/
 Package: zig-oldstable
-Version: ZIG_VERSION-BUILD_VERSION~griffo
+Version: ZIG_VERSION-BUILD_VERSION~gaofn
 Architecture: ARCH
 Depends:
 Description: Zig is a general-purpose programming language and toolchain for maintaining robust, optimal and reusable software. (old stable release)

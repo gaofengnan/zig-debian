@@ -2,4 +2,4 @@ zig (BUILD_VERSION) stable; urgency=low
   
   * https://github.com/ziglang/zig/releases
 
- -- Dario Griffo <dariogriffo@gmail.com>  2025-07-13T08:00:00+00:00
+ -- Fengnan Gao <gao.fengnan@gmail.com>  2025-07-13T08:00:00+00:00
