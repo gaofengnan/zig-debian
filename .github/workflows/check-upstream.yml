@@ -6,7 +6,8 @@
 # (tag "<ver>+<build>") and, if they differ and no build is running, dispatch release.yml.
 # Safe to delete: the fork then goes back to manual dispatch like his.
 # Zig specifics: the version comes from https://ziglang.org/download/index.json (highest x.y.z key,
-# "master" excluded), and only the stable package is built: zig_oldstable_version is left empty.
+# "master" excluded). release.yml requires both packages (fail_on_unmatched_files), so the oldstable
+# version is passed too: the highest x.y.z of the previous minor series.
 name: Check for new zig release
 
 on:
@@ -42,6 +43,14 @@ jobs:
           fi
           echo "Upstream stable: ${up_ver}"
 
+          old_ver=$(curl -fsSL https://ziglang.org/download/index.json | jq -r --arg up "$up_ver" \
+            'del(.master) | keys | map(select(test("^[0-9]+\\.[0-9]+\\.[0-9]+$"))) | map(select((split(".")[1] | tonumber) < ($up | split(".")[1] | tonumber))) | sort_by(split(".") | map(tonumber)) | last')
+          if [ -z "$old_ver" ] || [ "$old_ver" = "null" ]; then
+            echo "Could not read the oldstable zig version; aborting."
+            exit 1
+          fi
+          echo "Upstream oldstable: ${old_ver}"
+
           ours=$(gh api "repos/${GITHUB_REPOSITORY}/releases/latest" -q .tag_name 2>/dev/null || echo "")
           ours_ver="${ours%%+*}"
           echo "Ours: ${ours:-<none>} -> ${ours_ver:-<none>}"
@@ -59,4 +68,4 @@ jobs:
           fi
 
           echo "New release detected: ${ours_ver:-<none>} -> ${up_ver}. Dispatching build."
-          gh workflow run release.yml -f zig_stable_version="${up_ver}" -f build_version=1
+          gh workflow run release.yml -f zig_stable_version="${up_ver}" -f zig_oldstable_version="${old_ver}" -f build_version=1
